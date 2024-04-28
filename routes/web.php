@@ -20,3 +20,8 @@ Route::get('/', function () {
 });
 Route::get('/auth/login', [AuthController::class, 'index'])->middleware('guest');
 Route::post('/auth/login', [AuthController::class, 'authenticate'])->name('auth');
+
+Route::get('/auth/register', [AuthController::class, 'register'])->middleware('guest');
+Route::post('/auth/register', [AuthController::class, 'store'])->name('register');
+
+Route::get('/auth/logout', [AuthController::class, 'logout']);
