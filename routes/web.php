@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -25,3 +26,7 @@ Route::get('/auth/register', [AuthController::class, 'register'])->middleware('g
 Route::post('/auth/register', [AuthController::class, 'store'])->name('register');
 
 Route::get('/auth/logout', [AuthController::class, 'logout']);
+
+Route::prefix('/admin')->middleware(['admin', 'auth'])->group(function () {
+    Route::resource('/category', CategoryController::class);
+});
