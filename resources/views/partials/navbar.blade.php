@@ -21,16 +21,31 @@
             <i class="fas fa-shopping-cart" style="font-size: 20px; margin-top: 10px; color:#00215E;"></i>
         </a>
       </li>
+      @auth
+      <div class="dropdown mt-3 ml-3">
+      <a class="dropdown-toggle text-decoration-none" style="color:#00215E;" href="" role="button" data-toggle="dropdown" aria-expanded="false">
+        {{ auth()->user()->name }}
+      </a>
+
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">Edit Profil</a>
+        <a class="dropdown-item" href="/auth/logout">Logout</a>
+      </div>
+    </div>
+      @endauth
+
+      @guest
       <li class="nav-item active ml-lg-3">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('auth.index') }}">
             <button class="btn btn-outline-primary w-100 text-uppercase">Sign up</button>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link pt-md-1 pt-lg-2" href="#">
+        <a class="nav-link pt-md-1 pt-lg-2" href="{{ route('auth.index') }}">
             <button class="btn btn-primary w-100 text-uppercase">Login</button>
         </a>
       </li>
+      @endguest
     </ul>
   </div>
 </div>

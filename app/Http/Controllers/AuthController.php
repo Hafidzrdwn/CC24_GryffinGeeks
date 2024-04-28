@@ -11,8 +11,7 @@ class AuthController extends Controller
 {
     public function index()
     {
-        // return 'adsad';
-        return view('login');
+        return view('pages.auth.login');
     }
 
     public function authenticate(Request $request)
@@ -20,21 +19,24 @@ class AuthController extends Controller
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
+        ], [
+            'email.required' => 'Email tidak boleh kosong.',
+            'password.required' => 'Password tidak boleh kosong.',
+            'email.email' => 'Email tidak valid.',
         ]);
 
         if (Auth::attempt($credentials)) {
+            $user = User::where('email', $credentials['email'])->first();
+            Auth::login($user);
             $request->session()->regenerate();
             if (Auth::user()->is_admin == 0) {
-
                 return redirect()->intended('/');
             } else {
                 return redirect()->intended('/dashboard');
             }
         }
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
+        return back()->with('error', '<strong>Email atau Password</strong> Salah!');
     }
 
     public function logout(Request $request)
@@ -50,7 +52,7 @@ class AuthController extends Controller
 
     public function register()
     {
-        return view('register');
+        return view('pages.auth.register');
     }
 
     public function store(Request $request)
@@ -59,9 +61,15 @@ class AuthController extends Controller
             'email' => ['required', 'email', 'unique:user,email'],
             'name' => ['required'],
             'password' => ['required'],
+        ], [
+            'email.required' => 'Email tidak boleh kosong.',
+            'password.required' => 'Password tidak boleh kosong.',
+            'name.required' => 'Nama tidak boleh kosong.',
+            'email.email' => 'Email tidak valid.',
+            'email.unique' => 'Email sudah terdaftar.'
         ]);
 
-        $credentials['photo'] = '/img/default.png';
+        $credentials['photo'] = '/images/default.jpg';
         $user = User::create([
             'name' => $credentials['name'],
             'email' => $credentials['email'],

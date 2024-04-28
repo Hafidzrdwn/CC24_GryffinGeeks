@@ -17,13 +17,13 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/auth/login', [AuthController::class, 'index'])->middleware('guest');
-Route::post('/auth/login', [AuthController::class, 'authenticate'])->name('auth');
+Route::get('/auth/login', [AuthController::class, 'index'])->name('auth.index')->middleware('guest');
+Route::post('/auth/login', [AuthController::class, 'authenticate'])->name('auth.login')->middleware('guest');
 
-Route::get('/auth/register', [AuthController::class, 'register'])->middleware('guest');
-Route::post('/auth/register', [AuthController::class, 'store'])->name('register');
+Route::get('/auth/register', [AuthController::class, 'register'])->name('register.index')->middleware('guest');
+Route::post('/auth/register', [AuthController::class, 'store'])->name('register.signup')->middleware('guest');
 
-Route::get('/auth/logout', [AuthController::class, 'logout']);
+Route::get('/auth/logout', [AuthController::class, 'logout'])->middleware('auth');
 
 Route::prefix('/admin')->middleware(['admin', 'auth'])->group(function () {
     Route::resource('/category', CategoryController::class);

@@ -12,7 +12,7 @@
   </head>
   <body>
   @include('partials.navbar')
-    <div class="container container-md-fluid pt-5 px-0">
+    <div class="container container-md-fluid pt-5 px-0" style="min-height:100vh;">
         @yield('content')
     </div>
 
