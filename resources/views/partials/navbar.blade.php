@@ -9,7 +9,7 @@
   <div class="collapse navbar-collapse mt-2 mt-lg-0 mt-xl-0" id="navbarNav">
     <ul class="navbar-nav ml-lg-5">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link ml-lg-4" href="#">Products</a>
