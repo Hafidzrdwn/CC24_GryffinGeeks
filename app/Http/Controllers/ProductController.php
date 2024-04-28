@@ -49,6 +49,7 @@ class ProductController extends Controller
         ]);
         $credentials['product_image'] =
             'storage/' . $request->product_image->store('images/products', 'public');
+            $credentials['available_stock'] = 10;
         Product::create($credentials);
         return redirect(route('product.index'))->with('success', 'Data added');
     }
