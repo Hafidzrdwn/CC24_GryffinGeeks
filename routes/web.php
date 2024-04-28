@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 Route::get('/auth/login', [AuthController::class, 'index'])->middleware('guest')->name('login');
 Route::post('/auth/login', [AuthController::class, 'authenticate'])->name('auth');
 
@@ -32,3 +31,5 @@ Route::prefix('/admin')->middleware(['admin', 'auth'])->group(function () {
     Route::resource('/category', CategoryController::class);
     Route::resource('/product', ProductController::class);
 });
+
+Route::get('/', [HomeController::class, 'index']);
