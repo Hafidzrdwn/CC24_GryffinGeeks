@@ -30,6 +30,9 @@ Route::get('/auth/logout', [AuthController::class, 'logout'])->middleware('auth'
 Route::prefix('/admin')->middleware(['admin', 'auth'])->group(function () {
     Route::resource('/category', CategoryController::class);
     Route::resource('/product', ProductController::class);
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    });
 });
 
 Route::get('/', [HomeController::class, 'index']);
