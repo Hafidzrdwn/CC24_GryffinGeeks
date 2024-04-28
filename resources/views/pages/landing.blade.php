@@ -24,63 +24,18 @@
         <h6>Beberapa kategori yang dapat anda eksplor!</h6>
 
         <div class="row mt-4 justify-content-center align-items-start flex-wrap mx-0" style="row-gap: 15px;">
+        @forelse($categories as $c)
             <div class="col-lg-3 col-6 col-sm-6 px-2">
                 <div class="card" >
                 <div class="card-body">
-                    <img src="{{ asset('images/category/accessoris.png') }}" class="w-50 d-block mx-auto">
-                    <h3 style="color:#00215E;" class="text-center">Accessoris</h5>
+                    <img src="{{ $c->icon }}" class="w-50 d-block mx-auto">
+                    <h3 style="color:#00215E;" class="text-center">{{ $c->category_name }}</h5>
                 </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-6 col-sm-6 px-2">
-                <div class="card" >
-                <div class="card-body">
-                    <img src="{{ asset('images/category/accessoris.png') }}" class="w-50 d-block mx-auto">
-                    <h3 style="color:#00215E;" class="text-center">Accessoris</h5>
-                </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-6 col-sm-6 px-2">
-                <div class="card" >
-                <div class="card-body">
-                    <img src="{{ asset('images/category/accessoris.png') }}" class="w-50 d-block mx-auto">
-                    <h3 style="color:#00215E;" class="text-center">Accessoris</h5>
-                </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-6 col-sm-6 px-2">
-                <div class="card" >
-                <div class="card-body">
-                    <img src="{{ asset('images/category/accessoris.png') }}" class="w-50 d-block mx-auto">
-                    <h3 style="color:#00215E;" class="text-center">Accessoris</h5>
-                </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-6 col-sm-6 px-2">
-                <div class="card" >
-                <div class="card-body">
-                    <img src="{{ asset('images/category/accessoris.png') }}" class="w-50 d-block mx-auto">
-                    <h3 style="color:#00215E;" class="text-center">Accessoris</h5>
-                </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-6 col-sm-6 px-2">
-                <div class="card" >
-                <div class="card-body">
-                    <img src="{{ asset('images/category/accessoris.png') }}" class="w-50 d-block mx-auto">
-                    <h3 style="color:#00215E;" class="text-center">Accessoris</h5>
-                </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-6 col-sm-6 px-2">
-                <div class="card" >
-                <div class="card-body">
-                    <img src="{{ asset('images/category/accessoris.png') }}" class="w-50 d-block mx-auto">
-                    <h3 style="color:#00215E;" class="text-center">Accessoris</h5>
-                </div>
-                </div>
-            </div>
-            
+            </div>    
+        @empty
+            <h3 class="text-center">Data Kategori Kosong.</h3>
+        @endforelse
         </div>
 
     </section>
@@ -89,14 +44,15 @@
         <h6>Produk keluaran terbaru yang tentunya menarik!</h6>
 
         <div class="row mt-4 justify-content-center align-items-start" style="row-gap: 15px;">
+        @forelse($products as $p)
             <div class="col-lg-3 col-md-4 col-6 px-2">
                 <div class="card shadow">
-                    <img src="{{ asset('images/products/macair15.png') }}" class="card-img-top" alt="...">
+                    <img src="{{ $p->product_image }}" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h6 class="card-text" style="font-size: 18px;">Some quick example text.</h6>
+                        <h6 class="card-text" style="font-size: 18px;">{{$p->product_name}}</h6>
 
                         <div class="d-flex justify-content-between align-items-center mt-4">
-                            <div class="text-price">Rp. 35.000.000</div>
+                            <div class="text-price">Rp. {{$p->price}}</div>
                             <div class="text-rating" style="color:#00215E;">
                                 <i class="fas fa-star" style="font-size: 16px;"></i>
                                 <span>4.6</span>
@@ -107,60 +63,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-4 col-6 px-2">
-                <div class="card shadow">
-                    <img src="{{ asset('images/products/macair15.png') }}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h6 class="card-text" style="font-size: 18px;">Some quick example text.</h6>
-
-                        <div class="d-flex justify-content-between align-items-center mt-4">
-                            <div class="text-price">Rp. 35.000.000</div>
-                            <div class="text-rating" style="color:#00215E;">
-                                <i class="fas fa-star" style="font-size: 16px;"></i>
-                                <span>4.6</span>
-                            </div>
-                        </div>
-
-                        <a href="" class="mt-4 w-100 btn text-white" style="background:#00215E;">Detail Produk</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6 px-2">
-                <div class="card shadow">
-                    <img src="{{ asset('images/products/macair15.png') }}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h6 class="card-text" style="font-size: 18px;">Some quick example text.</h6>
-
-                        <div class="d-flex justify-content-between align-items-center mt-4">
-                            <div class="text-price">Rp. 35.000.000</div>
-                            <div class="text-rating" style="color:#00215E;">
-                                <i class="fas fa-star" style="font-size: 16px;"></i>
-                                <span>4.6</span>
-                            </div>
-                        </div>
-
-                        <a href="" class="mt-4 w-100 btn text-white" style="background:#00215E;">Detail Produk</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6 px-2">
-                <div class="card shadow">
-                    <img src="{{ asset('images/products/macair15.png') }}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h6 class="card-text" style="font-size: 18px;">Some quick example text.</h6>
-
-                        <div class="d-flex justify-content-between align-items-center mt-4">
-                            <div class="text-price">Rp. 35.000.000</div>
-                            <div class="text-rating" style="color:#00215E;">
-                                <i class="fas fa-star" style="font-size: 16px;"></i>
-                                <span>4.6</span>
-                            </div>
-                        </div>
-
-                        <a href="" class="mt-4 w-100 btn text-white" style="background:#00215E;">Detail Produk</a>
-                    </div>
-                </div>
-            </div>
+            @empty
+            <h3 class="text-center">Data Produk Kosong.</h3>
+        @endforelse        
         </div>
 
     </section>
