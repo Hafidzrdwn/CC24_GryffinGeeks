@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('category', [
-            'category' => Category::all()
+        return view('product', [
+            'product' => Product::all()
         ]);
     }
 
@@ -26,7 +27,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('create_category');
+        return view('create_product', [
+            'category' => Category::all()
+        ]);
     }
 
     /**
@@ -37,16 +40,16 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $credentials = $request->validate([
-            'category_name' => 'required'
+            'product_name' => 'required',
+            'price' => 'required',
+            'stock' => 'required',
+            'desc' => 'required',
+            'category_id' => 'required'
         ]);
-        $credentials['logo'] = 'img/default_logo.png';
-        Category::create([
-            'category_name' => $credentials['category_name'],
-            'icon' => $credentials['logo']
-        ]);
-        return redirect('/admin/category')->with('success', 'data created');
+        $credentials['product_image'] = 'img/default_product.png';
+        Product::create($credentials);
+        return redirect(route('product.index'))->with('success', 'Data added');
     }
 
     /**
@@ -57,6 +60,9 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
+        return view('detail_product', [
+            'product' => Product::find($id)
+        ]);
     }
 
     /**
@@ -67,9 +73,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::find($id);
-        return view('edit_category', [
-            'category' => $category
+        return view('edit_product', [
+            'product' => Product::find($id),
+            'category' => Category::all()
         ]);
     }
 
@@ -82,13 +88,15 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'category_name' => ['required']
+        $credentials = $request->validate([
+            'product_name' => 'required',
+            'price' => 'required',
+            'stock' => 'required',
+            'desc' => 'required',
+            'category_id' => 'required'
         ]);
-        Category::find($id)->update([
-            'category_name' => $request->category_name
-        ]);
-        return redirect(route('category.index'))->with('success', 'Data updated');
+        Product::find($id)->update($credentials);
+        return redirect(route('product.index'))->with('success', 'data updated');
     }
 
     /**
@@ -99,7 +107,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        Category::destroy($id);
-        return redirect(route('category.index'))->with('success', 'Data deleted');
+        Product::destroy($id);
+        return redirect(route('product.index'))->with('success', 'data deleted');
     }
 }

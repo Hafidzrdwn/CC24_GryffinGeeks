@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/auth/login', [AuthController::class, 'index'])->middleware('guest');
+Route::get('/auth/login', [AuthController::class, 'index'])->middleware('guest')->name('login');
 Route::post('/auth/login', [AuthController::class, 'authenticate'])->name('auth');
 
 Route::get('/auth/register', [AuthController::class, 'register'])->middleware('guest');
@@ -29,4 +30,5 @@ Route::get('/auth/logout', [AuthController::class, 'logout']);
 
 Route::prefix('/admin')->middleware(['admin', 'auth'])->group(function () {
     Route::resource('/category', CategoryController::class);
+    Route::resource('/product', ProductController::class);
 });

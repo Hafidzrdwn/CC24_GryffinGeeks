@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('product_name');
             $table->integer('price');
             $table->integer('stock');
-            $table->integer('available_stock');
             $table->integer('rating')->nullable();
             $table->string('desc');
             $table->bigInteger('category_id')->unsigned();

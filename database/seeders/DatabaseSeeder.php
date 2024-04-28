@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -33,6 +34,15 @@ class DatabaseSeeder extends Seeder
             'email' => 'budi@gmail.com',
             'password' => bcrypt('budi123'),
             'is_admin' => 0
+        ]);
+
+        Category::create([
+            'category_name' => 'Laptop',
+            'icon' => 'img/default.png'
+        ]);
+        Category::create([
+            'category_name' => 'Handphone',
+            'icon' => 'img/default.png'
         ]);
     }
 }
