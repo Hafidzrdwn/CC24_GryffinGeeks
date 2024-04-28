@@ -18,7 +18,7 @@
     <ul class="navbar-nav ml-auto">
       <li class="nav-item active">
         <a class="nav-link" href="#">
-            <i class="fas fa-shopping-cart text-primary" style="font-size: 20px; margin-top: 10px;"></i>
+            <i class="fas fa-shopping-cart" style="font-size: 20px; margin-top: 10px; color:#00215E;"></i>
         </a>
       </li>
       <li class="nav-item active ml-lg-3">
