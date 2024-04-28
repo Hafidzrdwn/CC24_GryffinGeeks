@@ -1,4 +1,4 @@
-<footer class="container text-white text-center mx-0">
+<footer class="container text-white text-center">
     <h2>Merah Putih</h3>
 
     <div class="d-flex justify-content-center" style="column-gap: 15px;">
