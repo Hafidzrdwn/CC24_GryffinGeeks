@@ -34,6 +34,9 @@
             @endforeach
         </select>
 
+        <input type="file" name="product_image" accept=".jpg, .jpeg, .png" id="">
+
+
         <button type="submit">Submit</button>
 
     </form>

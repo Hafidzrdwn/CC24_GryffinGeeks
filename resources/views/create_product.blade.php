@@ -10,7 +10,7 @@
 
 <body>
 
-    <form action="{{ route('product.store') }}" method="POST">
+    <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <label for="">Product name</label>
         <input type="text" name="product_name">
@@ -28,6 +28,8 @@
                 <option value="{{ $c->id }}">{{ $c->category_name }}</option>
             @endforeach
         </select>
+
+        <input type="file" name="product_image" accept=".jpg, .jpeg, .png" id="">
 
         <button type="submit">Submit</button>
 

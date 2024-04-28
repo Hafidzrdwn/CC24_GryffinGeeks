@@ -47,7 +47,8 @@ class ProductController extends Controller
             'desc' => 'required',
             'category_id' => 'required'
         ]);
-        $credentials['product_image'] = 'img/default_product.png';
+        $credentials['product_image'] =
+            'storage/' . $request->product_image->store('images/products', 'public');
         Product::create($credentials);
         return redirect(route('product.index'))->with('success', 'Data added');
     }
@@ -60,7 +61,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        return view('detail_product', [
+        return view('show_product', [
             'product' => Product::find($id)
         ]);
     }
@@ -95,7 +96,15 @@ class ProductController extends Controller
             'desc' => 'required',
             'category_id' => 'required'
         ]);
-        Product::find($id)->update($credentials);
+
+        $produk = Product::find($id);
+
+        if ($request->hasFile('product_image')) {
+            $credentials['product_image'] = 'storage' . $request->icon->store('images/product', 'public');
+            unlink($produk->product_image);
+        }
+
+        $produk->update($credentials);
         return redirect(route('product.index'))->with('success', 'data updated');
     }
 

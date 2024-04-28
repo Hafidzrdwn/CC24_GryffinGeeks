@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -41,10 +42,10 @@ class CategoryController extends Controller
         $credentials = $request->validate([
             'category_name' => 'required'
         ]);
-        $credentials['logo'] = 'img/default_logo.png';
+        $credentials['logo'] = $request->logo->store('images/categories', 'public');
         Category::create([
             'category_name' => $credentials['category_name'],
-            'icon' => $credentials['logo']
+            'icon' => 'storage/' . $credentials['logo']
         ]);
         return redirect('/admin/category')->with('success', 'data created');
     }
@@ -82,12 +83,19 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $credentials = $request->validate([
             'category_name' => ['required']
         ]);
-        Category::find($id)->update([
+        $category = Category::find($id);
+        if ($request->hasFile('icon')) {
+            $credentials['logo'] = 'storage' . $request->icon->store('images/categories', 'public');
+            unlink($category->icon);
+        }
+        $category->update([
             'category_name' => $request->category_name
         ]);
+
+
         return redirect(route('category.index'))->with('success', 'Data updated');
     }
 
