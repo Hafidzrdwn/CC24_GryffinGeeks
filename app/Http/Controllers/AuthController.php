@@ -32,7 +32,7 @@ class AuthController extends Controller
             if (Auth::user()->is_admin == 0) {
                 return redirect()->intended('/');
             } else {
-                return redirect()->intended('/dashboard');
+                return redirect()->intended('/admin/dashboard');
             }
         }
 
