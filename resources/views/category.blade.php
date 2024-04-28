@@ -17,6 +17,8 @@
             @method('delete')
             <button type="submit">delete</button>
         </form>
+
+        <a href="{{ route('category.edit', $c->id) }}">Edit</a>
     @endforeach
 
 </body>
